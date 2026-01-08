@@ -43,29 +43,12 @@ export default function FeaturedProject() {
               ))}
             </ul>
 
-            {/* Links */}
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
-                className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-                href={p.links.github}
-                target="_blank"
-                rel="noreferrer"
+                href="/projects/migal"
+                className="w-full sm:w-auto text-center rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 active:scale-[0.99]"
               >
-                GitHub
-              </a>
-              <a
-                className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-                href={p.links.demo}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Live Demo
-              </a>
-              <a
-                className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-                href={p.links.report}
-              >
-                Report / CV
+                Case Study
               </a>
             </div>
           </div>
@@ -93,8 +76,8 @@ export default function FeaturedProject() {
             <div className="mt-6 rounded-lg border border-white/10 bg-white/5 p-4 text-sm text-zinc-300">
               <p className="font-medium text-white">Why it’s cool</p>
               <p className="mt-2">
-                It’s not just “trained a model” — it’s a full DSS workflow that
-                can evolve as MIGAL adds more seasons and features.
+                It’s not just “trained a model” — it’s a full DSS workflow that can
+                evolve as MIGAL adds more seasons and features.
               </p>
             </div>
           </div>

@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -33,8 +31,8 @@ export default function Hero() {
 
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg">
             I build practical software end-to-end — from clean UIs to backend APIs
-            and data/ML pipelines. Here’s my work, starting with a real research
-            project built with MIGAL.
+            and data/ML pipelines. This site highlights a mix of real projects:
+            research-driven work with MIGAL, full‑stack apps, and ML experiments.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">

@@ -95,31 +95,6 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
-
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <a
-                    href={proj.links.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    href={proj.links.demo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-                  >
-                    Demo
-                  </a>
-                </div>
-
-                {proj.links.demo === "#" && (
-                  <p className="mt-3 text-xs text-zinc-400">
-                    Demo link will be added soon.
-                  </p>
-                )}
               </div>
             </div>
           ))}
@@ -134,30 +109,94 @@ export default function Home() {
         title="Contact"
         description="Want to collaborate or talk about a role? Send me a message:"
       >
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-          <div className="flex flex-wrap gap-3">
-            <a
-              href="mailto:ramiabujabal22@gmail.com"
-              className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-            >
-              Email
-            </a>
-            <a
-              href="https://www.linkedin.com/in/rami-abu-jabal-b52374287/"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://github.com/RamiiAjj"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-            >
-              GitHub
-            </a>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <p className="text-sm text-zinc-300">Quick note</p>
+            <h3 className="mt-2 text-xl font-semibold text-white">
+              Let’s build something real.
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-zinc-300">
+              I’m open to internships / junior roles and collaborations — especially
+              full-stack, data, and ML projects.
+            </p>
+
+            <div className="mt-5 grid gap-2 text-sm text-zinc-300">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex h-2 w-2 rounded-full bg-emerald-300" />
+                <span>Usually responds fast</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="inline-flex h-2 w-2 rounded-full bg-cyan-300" />
+                <span>Based in Israel • Remote friendly</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <a
+                href="mailto:ramiabujabal22@gmail.com?subject=Portfolio%20Contact&body=Hi%20Rami%2C%0A%0A"
+                className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10 active:scale-[0.99]"
+              >
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-white">Email</p>
+                  <span className="text-xs text-zinc-400 group-hover:text-zinc-300">
+                    mailto
+                  </span>
+                </div>
+                <p className="mt-2 font-mono text-xs text-zinc-300">
+                  ramiabujabal22@gmail.com
+                </p>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/rami-abu-jabal-b52374287/"
+                target="_blank"
+                rel="noreferrer"
+                className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10 active:scale-[0.99]"
+              >
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-white">LinkedIn</p>
+                  <span className="text-xs text-zinc-400 group-hover:text-zinc-300">
+                    profile
+                  </span>
+                </div>
+                <p className="mt-2 text-xs text-zinc-300">
+                  Connect + message me
+                </p>
+              </a>
+
+              <a
+                href="https://github.com/RamiiAjj"
+                target="_blank"
+                rel="noreferrer"
+                className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10 active:scale-[0.99]"
+              >
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-white">GitHub</p>
+                  <span className="text-xs text-zinc-400 group-hover:text-zinc-300">
+                    repos
+                  </span>
+                </div>
+                <p className="mt-2 text-xs text-zinc-300">
+                  Projects + code
+                </p>
+              </a>
+
+              <a
+                href="/resume.pdf"
+                download="Rami_Abu-Jabal_Resume.pdf"
+                className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10 active:scale-[0.99]"
+              >
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-white">Resume</p>
+                  <span className="text-xs text-zinc-400 group-hover:text-zinc-300">
+                    pdf
+                  </span>
+                </div>
+                <p className="mt-2 text-xs text-zinc-300">Download</p>
+              </a>
+            </div>
           </div>
         </div>
       </Section>
