@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function MigalCaseStudy() {
   return (
-    <main className="mx-auto w-full max-w-6xl px-6 py-16">
+    <main className="mx-auto w-full max-w-6xl px-0 py-6 sm:px-6 sm:py-16">
       {/* Header */}
       <header className="space-y-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -22,7 +22,7 @@ export default function MigalCaseStudy() {
 
         <div>
           <p className="text-sm font-medium text-zinc-400">Case Study</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-white">
+          <h1 className="mt-2 text-3xl sm:text-4xl font-semibold tracking-tight text-white">
             MIGAL — AI Decision Support System (DSS) for Farmers
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-zinc-300">

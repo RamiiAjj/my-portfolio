@@ -56,3 +56,19 @@ section {
     scroll-snap-type: none;
   }
 }
+
+@media (max-width: 767px) {
+  html {
+    scroll-snap-type: none;
+    scroll-padding-top: 88px;
+  }
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 4px;
+}
+
+.portfolio-status {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}

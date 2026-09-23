@@ -31,9 +31,9 @@ export default function Section({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-120px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={cx("scroll-mt-24 py-16", className)}
+      className={cx("scroll-mt-24 py-8 sm:py-16", className)}
     >
-      <div className="mx-auto w-full max-w-5xl px-6">
+      <div className="mx-auto w-full max-w-5xl px-0 sm:px-6">
         {(eyebrow || title || description) && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -46,7 +46,7 @@ export default function Section({
               <p className="text-sm font-medium text-zinc-400">{eyebrow}</p>
             )}
             {title && (
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white">
+              <h2 className="mt-2 text-2xl sm:text-3xl font-semibold tracking-tight text-white">
                 {title}
               </h2>
             )}

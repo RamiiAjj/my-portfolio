@@ -1,76 +1,51 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section id="home" className="scroll-mt-24 pt-10 md:pt-16">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-120px" }}
-        transition={{ duration: 0.55, ease: "easeOut" }}
-        className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur md:p-12"
-      >
-        {/* glow */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-fuchsia-500/15 blur-3xl" />
-          <div className="absolute -right-28 top-10 h-72 w-72 rounded-full bg-cyan-500/12 blur-3xl" />
-          <div className="absolute left-1/2 -bottom-32 h-80 w-80 -translate-x-1/2 rounded-full bg-emerald-500/10 blur-3xl" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.08),transparent_55%)]" />
+    <section id="home" aria-labelledby="intro-title" className="scroll-mt-24 pt-3 sm:pt-10">
+      <div className="relative isolate overflow-hidden rounded-3xl border border-white/10 bg-zinc-950/50 px-5 py-8 sm:p-10 lg:p-14">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-32 -top-32 -z-10 h-[480px] w-[480px] rounded-full bg-cyan-400/10 blur-3xl" />
+        <div aria-hidden="true" className="pointer-events-none absolute -bottom-40 -left-20 -z-10 h-96 w-96 rounded-full bg-fuchsia-500/10 blur-3xl" />
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <p className="text-sm font-medium text-white">Rami Abu Jabal <span className="mx-2 text-zinc-600">/</span> <span className="text-zinc-400">Developer</span></p>
+          <p className="inline-flex items-center gap-2 text-xs text-zinc-300">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
+            Open to software development opportunities
+          </p>
         </div>
 
-        <div className="relative">
-          <p className="text-sm font-medium text-zinc-300">
-            Computer Science • Full-Stack • ML
-          </p>
-
-          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-white md:text-6xl">
-            Rami Abu Jabal
-          </h1>
-
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg">
-            I build practical software end-to-end — from clean UIs to backend APIs
-            and data/ML pipelines. This site highlights a mix of real projects:
-            research-driven work with MIGAL, full‑stack apps, and ML experiments.
-          </p>
-
-          <div className="mt-7 flex flex-wrap gap-3">
-            <a
-              href="#projects"
-              className="rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-zinc-200 transition-transform hover:-translate-y-0.5"
-            >
-              View Projects
-            </a>
-             <a
-                      href="/resume.pdf"
-                      download="Rami_Abu-Jabal_Resume.pdf"
-                      className="rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition hover:bg-white/10"
-                    >
-                      Download Resume
-                    </a>
-            <a
-              href="#contact"
-              className="rounded-xl border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 transition-transform hover:-translate-y-0.5"
-            >
-              Contact
-            </a>
+        <div className="mt-10 grid items-end gap-8 lg:mt-16 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-cyan-200">Full-stack development & machine learning</p>
+            <h1 id="intro-title" className="mt-5 max-w-3xl text-[clamp(2.4rem,5.7vw,4.5rem)] leading-[1.08] font-semibold tracking-[-0.045em] text-white">
+              I turn complex data into <span className="text-cyan-200">practical software.</span>
+            </h1>
           </div>
-
-          <div className="mt-10 flex flex-wrap gap-2 text-xs text-zinc-300">
-            {["Next.js", "Tailwind", "Python", "ML", "Data Pipelines", "APIs"].map(
-              (t) => (
-                <span
-                  key={t}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1"
-                >
-                  {t}
-                </span>
-              ),
-            )}
+          <div className="lg:pb-1">
+            <p className="max-w-md text-base leading-7 text-zinc-300">
+              I’m Rami, a software developer with a year of experience, building web apps and ML pipelines — from the first dataset to the interface people use.
+            </p>
+            <a href="#featured-migal" className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm text-zinc-300 transition hover:text-cyan-200">
+              Explore my research work with MIGAL <ArrowDown className="h-4 w-4 shrink-0" aria-hidden="true" />
+            </a>
           </div>
         </div>
-      </motion.div>
+
+        <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-6">
+          <a href="#projects" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-cyan-200 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-100">
+            View Projects <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+          <a href="#contact" className="inline-flex min-h-12 items-center justify-center gap-2 px-2 text-sm font-medium text-white underline decoration-white/25 underline-offset-4 transition hover:decoration-cyan-200">
+            Let’s talk <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+
+        <div className="mt-9 grid gap-3 border-t border-white/10 pt-5 text-xs leading-5 text-zinc-400 sm:mt-12 sm:grid-cols-3 sm:gap-5">
+          <p><span className="mr-2 font-mono text-cyan-200/70">01</span> Interfaces & full-stack applications</p>
+          <p><span className="mr-2 font-mono text-cyan-200/70">02</span> Data preparation & ML pipelines</p>
+          <p><span className="mr-2 font-mono text-cyan-200/70">03</span> Research translated into software</p>
+        </div>
+      </div>
     </section>
   );
 }

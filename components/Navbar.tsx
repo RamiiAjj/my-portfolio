@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 type NavItem = {
   id: string;
@@ -11,8 +13,8 @@ export default function Navbar() {
   const items: NavItem[] = useMemo(
     () => [
       { id: "home", label: "Home" },
-      { id: "about", label: "About" },
       { id: "projects", label: "Projects" },
+      { id: "about", label: "About" },
       { id: "skills", label: "Skills" },
       { id: "contact", label: "Contact" },
     ],
@@ -20,6 +22,12 @@ export default function Navbar() {
   );
 
   const [activeId, setActiveId] = useState<string>("home");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+  }, []);
+
   const [progress, setProgress] = useState<number>(0);
 
   // Scroll progress bar
@@ -74,8 +82,31 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, [items]);
 
+  // CSS handles initial visibility; close the menu when entering desktop layout.
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onChange = () => { if (mq.matches) closeMenu(); };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, [closeMenu]);
+
+  // Mobile menu: close on hash change / escape
+  useEffect(() => {
+    const onHash = () => closeMenu();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMenu();
+    };
+
+    window.addEventListener("hashchange", onHash);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("hashchange", onHash);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [closeMenu]);
+
   const linkBase =
-    "rounded-lg px-3 py-2 text-sm text-zinc-200 transition hover:bg-white/10 hover:text-white";
+    "rounded-lg px-3 py-2.5 text-sm text-zinc-200 transition hover:bg-white/10 hover:text-white";
 
   const activeLabel = items.find((i) => i.id === activeId)?.label ?? activeId;
   const scrollPct = Math.round(progress * 100);
@@ -91,62 +122,159 @@ export default function Navbar() {
         />
       </div>
 
-      <header className="sticky top-4 z-50">
-        <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur">
-          <div className="flex items-center justify-between gap-4">
-            <a
-              href="#home"
-              className="text-sm font-semibold tracking-tight text-white hover:text-zinc-200"
-              onClick={() => setActiveId("home")}
-            >
-              Rami
-            </a>
+      {menuOpen && (
+        <div className="fixed inset-0 z-40 bg-black/60 md:hidden" onClick={closeMenu} aria-hidden="true" />
+      )}
 
-            <nav className="flex items-center gap-1">
-              {items.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={() => setActiveId(item.id)}
-                  className={linkBase}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
+      <header className="sticky top-3 z-50 md:top-4">
+        <div className="mx-auto w-full max-w-6xl">
+          <div className="relative rounded-2xl border border-white/10 bg-zinc-950/90 px-3 py-2 md:px-4 md:py-2.5 backdrop-blur">
+            <div className="relative z-50 flex items-center justify-between gap-3 md:gap-4">
+              <Link
+                href="/#home"
+                className="text-sm font-semibold tracking-tight text-white hover:text-zinc-200"
+                onClick={() => {
+                  setActiveId("home");
+                  closeMenu();
+                }}
+              >
+                Rami
+              </Link>
 
-            <div className="hidden items-center gap-2 sm:flex">
-              <a
-                href="https://github.com/RamiiAjj"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/rami-abu-jabal-b52374287/"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10"
-              >
-                LinkedIn
-              </a>
+              {/* Desktop nav (centered) */}
+              <div className="hidden flex-1 justify-center md:flex">
+                <nav className="flex items-center gap-1">
+                  {items.map((item) => (
+                    <Link
+                      key={item.id}
+                      href={`/#${item.id}`}
+                      onClick={() => setActiveId(item.id)}
+                      className={linkBase}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+
+              {/* Right-side actions */}
+              <div className="flex items-center gap-2">
+                {/* Mobile menu button */}
+                  <button
+                    type="button"
+                    aria-label={menuOpen ? "Close menu" : "Open menu"}
+                    aria-expanded={menuOpen}
+                    aria-controls="mobile-navigation"
+                    onClick={() => setMenuOpen((v) => !v)}
+                    className="inline-flex min-h-11 min-w-11 md:hidden items-center justify-center rounded-lg border border-white/10 bg-white/5 p-2 text-white transition hover:bg-white/10 active:scale-[0.99]"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      {menuOpen ? (
+                        <path
+                          d="M6 6L18 18M18 6L6 18"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      ) : (
+                        <path
+                          d="M4 7H20M4 12H20M4 17H20"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      )}
+                    </svg>
+                  </button>
+
+                {/* Desktop socials */}
+                <div className="hidden items-center gap-2 md:flex">
+                  <Link
+                    href="https://github.com/RamiiAjj"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10"
+                  >
+                    GitHub
+                  </Link>
+                  <Link
+                    href="https://www.linkedin.com/in/rami-abu-jabal-b52374287/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white transition hover:bg-white/10"
+                  >
+                    LinkedIn
+                  </Link>
+                </div>
+              </div>
             </div>
+
+            {/* Mobile menu overlay (doesn't change navbar height) */}
+            {menuOpen && (
+              <>
+                {/* Dropdown */}
+                <div className="md:hidden absolute left-0 right-0 top-full z-50 mt-2 max-h-[calc(100dvh-110px)] overflow-y-auto">
+                  <div className="rounded-2xl border border-white/15 bg-black p-3 shadow-2xl">
+                    <nav id="mobile-navigation" aria-label="Mobile navigation" className="grid gap-2">
+                      {items.map((item) => (
+                        <Link
+                          key={item.id}
+                          href={`/#${item.id}`}
+                          onClick={() => {
+                            setActiveId(item.id);
+                            closeMenu();
+                          }}
+                          className="rounded-lg border border-white/15 bg-zinc-900 px-3 py-3 text-sm text-white transition hover:bg-zinc-800 active:scale-[0.99]"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </nav>
+
+                    <div className="mt-2 grid grid-cols-2 gap-2">
+                      <Link
+                        href="https://github.com/RamiiAjj"
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={closeMenu}
+                        className="rounded-lg border border-white/15 bg-zinc-900 px-3 py-3 text-sm text-white transition hover:bg-zinc-800 active:scale-[0.99]"
+                      >
+                        GitHub
+                      </Link>
+                      <Link
+                        href="https://www.linkedin.com/in/rami-abu-jabal-b52374287/"
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={closeMenu}
+                        className="rounded-lg border border-white/15 bg-zinc-900 px-3 py-3 text-sm text-white transition hover:bg-zinc-800 active:scale-[0.99]"
+                      >
+                        LinkedIn
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </header>
 
       {/* VS Code-style status bar */}
-      <footer className="fixed bottom-0 left-0 right-0 z-[60] border-t border-white/10 bg-black/40 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-2 text-[11px] text-zinc-200">
+      <footer className="portfolio-status fixed bottom-0 left-0 right-0 z-[60] border-t border-white/10 bg-black/40 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-1 md:py-2 text-[11px] text-zinc-200">
           {/* Left */}
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-1 font-mono">
               <span className="h-2 w-2 rounded-full bg-emerald-300" />
               <span>main</span>
             </span>
-            <span className="hidden items-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-1 sm:inline-flex">
+            <span className="hidden items-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-1 md:inline-flex">
               <span className="text-emerald-300">✓</span>
               <span>build ok</span>
             </span>
@@ -167,7 +295,7 @@ export default function Navbar() {
 
           {/* Right */}
           <div className="flex items-center gap-3 font-mono">
-            <span className="hidden sm:inline">Ln {fauxLine}, Col 1</span>
+            <span className="hidden md:inline">Ln {fauxLine}, Col 1</span>
             <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1">
               {scrollPct}%
             </span>

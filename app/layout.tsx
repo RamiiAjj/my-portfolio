@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -19,15 +19,21 @@ export const metadata: Metadata = {
     "Personal portfolio showcasing projects in full-stack development, machine learning, and systems.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth overflow-x-clip">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-[#050507] text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen overflow-x-clip bg-[#050507] text-white`}
       >
         {/* Decorative background */}
         <div className="pointer-events-none fixed inset-0 -z-10">
@@ -39,11 +45,11 @@ export default function RootLayout({
         </div>
 
         {/* Page wrapper */}
-        <div className="mx-auto w-full max-w-6xl px-6 py-10 pb-24">
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pt-3 sm:pt-10 pb-20 sm:pb-24">
           <Navbar />
 
           {/* Page content */}
-          <div className="pt-8">{children}</div>
+          <div className="pt-4 sm:pt-8">{children}</div>
         </div>
       </body>
     </html>

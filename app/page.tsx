@@ -6,65 +6,31 @@ import { projects } from "@/lib/data";
 
 export default function Home() {
   return (
-    <main>
-        <div id="home" className="scroll-mt-24" />
+    <main className="space-y-4 sm:space-y-10">
+
 
       <Hero />
 
       <Section
-        id="about"
-        title="About"
-        description="B.Sc. Computer Science student focused on building real products — creative, outside-the-box, and comfortable working in teams. I’m always chasing new challenges and learning fast."
-      >
-        <div className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <p className="text-sm text-zinc-300">Background</p>
-            <p className="mt-2 text-lg font-semibold text-white">B.Sc. in Computer Science</p>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-              Strong CS foundations + hands-on projects (full-stack, data, ML) built
-              like real software.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <p className="text-sm text-zinc-300">Mindset</p>
-            <p className="mt-2 text-lg font-semibold text-white">Outside-the-box builder</p>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-              I like creative solutions that are still practical: clean UX, clear logic,
-              and systems that hold up.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <p className="text-sm text-zinc-300">Team & Growth</p>
-            <p className="mt-2 text-lg font-semibold text-white">Collaborative + eager to learn</p>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-              I enjoy teamwork, feedback, and new challenges — always improving and
-              picking up new tools.
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      <Section
         id="projects"
-        eyebrow="Featured"
-        title="Projects"
-        description="A selection of real work — starting with my MIGAL DSS final project."
+        eyebrow="Selected work"
+        title="Built to solve real problems."
+        description="Research, web applications, and experiments in machine learning."
       >
         <FeaturedProject />
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
+        <h3 className="mt-12 text-xl font-semibold tracking-tight text-white">More projects</h3>
+        <div className="mt-5 sm:mt-6 grid gap-4 md:grid-cols-2">
           {projects.map((proj) => (
             <div
               key={proj.title}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur"
             >
               <div className="pointer-events-none absolute -inset-24 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                 <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500/12 via-cyan-500/10 to-emerald-500/10 blur-3xl" />
               </div>
 
               <div className="relative">
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex flex-col items-start gap-3 sm:flex-row sm:justify-between">
                   <div>
                     <h3 className="text-lg font-semibold text-white">
                       {proj.title}
@@ -101,6 +67,45 @@ export default function Home() {
         </div>
       </Section>
 
+      <Section id="about" eyebrow="About me" title="Curious about the whole picture.">
+        <div className="grid gap-8 border-t border-white/10 pt-7 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
+          <div className="max-w-2xl">
+            <p className="text-xl leading-relaxed tracking-tight text-white sm:text-2xl">
+              I’m Rami, a software developer with a year of experience and a
+              curiosity for how data, code, and people fit together.
+            </p>
+            <p className="mt-5 text-base leading-7 text-zinc-300">
+              I enjoy working across a project: understanding the problem,
+              figuring out the data, and building an interface that makes the
+              result useful. That’s what draws me to both full-stack development
+              and machine learning.
+            </p>
+            <p className="mt-4 text-base leading-7 text-zinc-300">
+              I like sharing ideas, getting feedback, and learning alongside a
+              team. I’m looking for my next software development role where I can
+              contribute to real products and keep growing as a developer.
+            </p>
+            <a href="#contact" className="mt-6 inline-flex min-h-11 items-center gap-3 text-sm font-medium text-cyan-200 underline decoration-cyan-200/30 underline-offset-4 transition hover:decoration-cyan-200">
+              Let’s work together <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <dl className="self-start border-l border-cyan-200/20 pl-5 sm:pl-7">
+            <div className="pb-5">
+              <dt className="text-xs uppercase tracking-[0.15em] text-zinc-400">Experience</dt>
+              <dd className="mt-2 text-base text-white">One year in software development</dd>
+            </div>
+            <div className="border-t border-white/10 py-5">
+              <dt className="text-xs uppercase tracking-[0.15em] text-zinc-400">Drawn to</dt>
+              <dd className="mt-2 text-base leading-7 text-white">Useful web apps, complex datasets, and practical ML</dd>
+            </div>
+            <div className="border-t border-white/10 pt-5">
+              <dt className="text-xs uppercase tracking-[0.15em] text-zinc-400">Based in</dt>
+              <dd className="mt-2 text-base text-white">Israel · Open to remote work</dd>
+            </div>
+          </dl>
+        </div>
+      </Section>
+
       <Skills />
 
       <Section
@@ -110,13 +115,13 @@ export default function Home() {
         description="Want to collaborate or talk about a role? Send me a message:"
       >
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+          <div className="order-2 md:order-1 rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur">
             <p className="text-sm text-zinc-300">Quick note</p>
             <h3 className="mt-2 text-xl font-semibold text-white">
               Let’s build something real.
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-              I’m open to internships / junior roles and collaborations — especially
+              I’m open to software development roles and collaborations — especially
               full-stack, data, and ML projects.
             </p>
 
@@ -132,11 +137,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+          <div className="order-1 md:order-2 rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6 backdrop-blur">
             <div className="grid gap-3 sm:grid-cols-2">
               <a
                 href="mailto:ramiabujabal22@gmail.com?subject=Portfolio%20Contact&body=Hi%20Rami%2C%0A%0A"
-                className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10 active:scale-[0.99]"
+                className="group rounded-xl border border-white/10 bg-white/5 p-4 sm:p-5 transition hover:bg-white/10 active:scale-[0.99]"
               >
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-white">Email</p>
@@ -144,7 +149,7 @@ export default function Home() {
                     mailto
                   </span>
                 </div>
-                <p className="mt-2 font-mono text-xs text-zinc-300">
+                <p className="mt-2 break-all font-mono text-xs text-zinc-300">
                   ramiabujabal22@gmail.com
                 </p>
               </a>
@@ -153,7 +158,7 @@ export default function Home() {
                 href="https://www.linkedin.com/in/rami-abu-jabal-b52374287/"
                 target="_blank"
                 rel="noreferrer"
-                className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10 active:scale-[0.99]"
+                className="group rounded-xl border border-white/10 bg-white/5 p-4 sm:p-5 transition hover:bg-white/10 active:scale-[0.99]"
               >
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-white">LinkedIn</p>
@@ -170,7 +175,7 @@ export default function Home() {
                 href="https://github.com/RamiiAjj"
                 target="_blank"
                 rel="noreferrer"
-                className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10 active:scale-[0.99]"
+                className="group rounded-xl border border-white/10 bg-white/5 p-4 sm:p-5 transition hover:bg-white/10 active:scale-[0.99]"
               >
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-white">GitHub</p>
@@ -186,7 +191,7 @@ export default function Home() {
               <a
                 href="/resume.pdf"
                 download="Rami_Abu-Jabal_Resume.pdf"
-                className="group rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10 active:scale-[0.99]"
+                className="group rounded-xl border border-white/10 bg-white/5 p-4 sm:p-5 transition hover:bg-white/10 active:scale-[0.99]"
               >
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-white">Resume</p>
