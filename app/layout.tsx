@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import PortfolioChat from "@/components/PortfolioChat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,6 +52,7 @@ export default function RootLayout({
           {/* Page content */}
           <div className="pt-4 sm:pt-8">{children}</div>
         </div>
+        <PortfolioChat />
       </body>
     </html>
   );
